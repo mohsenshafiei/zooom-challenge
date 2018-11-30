@@ -1,14 +1,57 @@
 {
   "name": "zooom-challenge",
   "version": "0.0.1",
-  "description": "Zooom productions coding challenge.",
+  "description": "Zooom Productions Coding Challenge",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dashboard -- node ./build/devServer.js",
+    "build:dev": "webpack --config ./build.webpack.config.dev.js",
+    "build:prod": "webpack --config ./build/webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "zooom-challege"
-  ],
-  "author": "Mohsen Shafiei Tafreshi (mohsenshafieitafreshi@gmail.com)",
-  "license": "MIT"
+  "author": "Mohsen Shafiei Tafreshi <mohsenshafieitafreshi@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "dotenv": "^6.0.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.9.3",
+    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.23.0",
+    "ts-loader": "^5.1.1",
+    "typescript": "^3.0.3",
+    "webpack": "^4.19.1",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dashboard": "^2.0.0",
+    "webpack-dev-server": "^3.1.8",
+    "webpack-merge": "^4.1.4",
+    "webpack-pwa-manifest": "^3.7.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@types/classnames": "^2.2.6",
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "@types/react-redux": "^6.0.9",
+    "@types/react-router-dom": "^4.3.1",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-saga": "^0.16.0",
+    "url-loader": "^1.1.1"
+  }
 }
