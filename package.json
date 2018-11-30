@@ -1,0 +1,14 @@
+{
+  "name": "zooom-challenge",
+  "version": "0.0.1",
+  "description": "Zooom productions coding challenge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zooom-challege"
+  ],
+  "author": "Mohsen Shafiei Tafreshi (mohsenshafieitafreshi@gmail.com)",
+  "license": "MIT"
+}
