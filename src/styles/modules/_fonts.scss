@@ -1,0 +1,15 @@
+$sizes-list: 2 4 8 16 32;
+@each $current-size in $sizes-list {
+    $i: index($sizes-list, $current-size);
+    .fontSize--#{$current-size}px {
+        font-size: $current-size + px;
+    }
+}
+
+$weights-list: 500 600 700 800 900;
+@each $current-size in $weights-list {
+    $i: index($weights-list, $current-size);
+    .fontWeight--#{$current-size}px {
+        font-weight: $current-size + px;
+    }
+}
