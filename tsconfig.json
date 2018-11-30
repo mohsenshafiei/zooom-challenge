@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "module": "esnext",
+    "strict": true,
+    "noImplicitAny": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "removeComments": false,
+    "baseUrl": "./",
+    // "strictNullChecks": false,
+    "paths": {
+      "Styles/*": ["src/styles/*"],
+      "Ui/*": ["src/ui/*"],
+      "Assets/*": ["src/assets/*"],
+      "Services/*": ["src/services/*"],
+      "Store/*": ["src/store/*"],
+      "Util/*": ["src/util/*"],
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+}
