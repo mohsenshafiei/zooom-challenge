@@ -1,0 +1,19 @@
+$sizes-list: 8 16 32 48 64;
+
+@each $current-size in $sizes-list {
+    $i: index($sizes-list, $current-size);
+    .W-#{$current-size} {
+        width: $current-size + px;
+    }
+    .H-#{$current-size} {
+        height: $current-size + px;
+    }
+}
+
+.width--100 {
+  width: 100%;
+}
+
+.maxWidth--100 {
+  max-width: 100%;
+}
