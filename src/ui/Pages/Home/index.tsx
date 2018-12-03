@@ -19,9 +19,7 @@ class Home_Page extends React.Component<IProps, IState> {
 
   public render() {
     return (
-      <div>
-        <h1>Zooom</h1>
-        <p>Building Better Brands</p>
+      <div className={style.container}>
       </div>
     );
   }
