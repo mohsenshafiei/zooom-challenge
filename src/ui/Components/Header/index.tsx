@@ -11,7 +11,7 @@ export class Header extends React.PureComponent<IHeaderProps, IHeaderState> {
   render() {
     return (
       <header className={style.header}>
-        <p className={style.title}>Zooom</p>
+        <a href="#" className={style.title}>Zooom</a>
       </header>
     );
   }
