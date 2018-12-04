@@ -1,0 +1,25 @@
+.searchBox {
+  border: 2px solid #f5f5f5;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  @media (max-width: 576px) {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
+  direction: ltr;
+  text-align: left;
+  font-size: 0.8em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+
+.searchBoxInput {
+  width: 90%;
+  height: 3em;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #d5d5d5;
+  padding-left: 1em;
+}
