@@ -2,7 +2,7 @@ import * as React from 'react';
 const style = require('./style.scss');
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import  { loginUserAction } from 'Store/User/actions';
+import {Link} from "react-router-dom";
 
 interface IProps {
 }
@@ -20,6 +20,11 @@ class Home_Page extends React.Component<IProps, IState> {
   public render() {
     return (
       <div className={style.container}>
+        <div className={style.mottoContainer}>
+          <h4 className={style.brand}> Zooom Productions</h4>
+          <p className={style.motto}> Building Better Brands</p>
+          <Link className={style.mapLink} to={'map'}>Go to Map</Link>
+        </div>
       </div>
     );
   }

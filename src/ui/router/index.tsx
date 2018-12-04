@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter as BrowserRouter, Route, Switch } from "react-router-dom";
-import { Home } from "Ui/Pages/Home";
+import { Home } from "ui/Pages/Home";
+import { Map } from "ui/Pages/Map";
 
 const Router = () => {
   const routes = [
@@ -8,6 +9,12 @@ const Router = () => {
       path: "/",
       exact: true,
       component: Home,
+      protected: false,
+    },
+    {
+      path: "/map",
+      exact: true,
+      component: Map,
       protected: false,
     },
   ];
