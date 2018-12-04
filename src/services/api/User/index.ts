@@ -1,4 +1,4 @@
-import { Client, HttpMethod } from 'Util/Api';
+import { Client, HttpMethod } from 'util/Api';
 import {
   ILoginRequest,
 } from "./model";
