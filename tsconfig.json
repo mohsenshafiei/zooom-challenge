@@ -3,27 +3,18 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "module": "esnext",
-    "strict": true,
-    "noImplicitAny": true,
     "target": "esnext",
+    "noImplicitAny": true,
     "sourceMap": true,
-    "removeComments": false,
     "baseUrl": "./",
-    // "strictNullChecks": false,
     "paths": {
-      "Styles/*": ["src/styles/*"],
-      "Ui/*": ["src/ui/*"],
-      "Assets/*": ["src/assets/*"],
-      "Services/*": ["src/services/*"],
-      "Store/*": ["src/store/*"],
-      "Util/*": ["src/util/*"],
+      "utils/*": ["src/utils/*"],
+      "styles/*": ["src/styles/*"],
+      "services/*": ["src/services/*"],
+      "store/*": ["src/store/*"],
+      "ui/*": ["src/ui/*"],
+      "assets/*": ["src/assets/*"],
+      "models/*": ["src/models/*"]
     }
-  },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-  ],
+  }
 }
