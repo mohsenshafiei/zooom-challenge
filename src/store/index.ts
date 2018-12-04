@@ -5,9 +5,9 @@ import {
   combineReducers,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import sagas from 'Store/sagas';
+import sagas from 'store/sagas';
 
-import userReducers from "Store/User/reducers";
+import userReducers from "store/User/reducers";
 
 const reducers = combineReducers({
   user: userReducers,
