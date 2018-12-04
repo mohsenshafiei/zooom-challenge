@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter as BrowserRouter, Route, Switch } from "react-router-dom";
-import { Home } from "ui/Pages/Home";
-import { Map } from "ui/Pages/Map";
+import { Home } from "ui/pages/Home";
+import { Map } from "ui/pages/Map";
 
 const Router = () => {
   const routes = [
