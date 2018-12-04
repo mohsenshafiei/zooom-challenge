@@ -88,12 +88,12 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
     alias: {
-      Styles: path.resolve(__dirname, '../src/styles'),
-      Ui: path.resolve(__dirname, '../src/ui'),
-      Assets: path.resolve(__dirname, '../src/assets'),
-      Services: path.resolve(__dirname, '../src/services'),
-      Store: path.resolve(__dirname, '../src/store'),
-      Util: path.resolve(__dirname, '../src/util'),
+      styles: path.resolve(__dirname, '../src/styles'),
+      ui: path.resolve(__dirname, '../src/ui'),
+      assets: path.resolve(__dirname, '../src/assets'),
+      services: path.resolve(__dirname, '../src/services'),
+      store: path.resolve(__dirname, '../src/store'),
+      util: path.resolve(__dirname, '../src/util'),
     },
   },
   target: 'web',
