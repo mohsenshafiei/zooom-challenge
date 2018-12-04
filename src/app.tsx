@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-require('Styles/index.scss');
+require('styles/index.scss');
 import store from './store';
 import { Provider } from 'react-redux';
-import { Router } from 'Ui/Router';
-import { Header } from 'Ui/Components/Header';
+import { Router } from 'ui/router';
+import { Header } from 'ui/components/Header';
+import { Footer } from 'ui/components/Footer';
 
 
 const ROOT_NODE: HTMLElement = document.getElementById('app') as HTMLElement;
@@ -15,6 +16,7 @@ ReactDOM.render(
       <>
         <Header/>
         <Router/>
+        {/*<Footer/>*/}
       </>
   </Provider>,
   ROOT_NODE,
