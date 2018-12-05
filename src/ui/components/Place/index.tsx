@@ -11,7 +11,7 @@ interface IPlaceProps {
   country: string,
   startDate: string,
   endDate: string,
-  category: string,
+  category: number,
   location: LngLatLike,
   selectLocation: (place: IPlace) => void
 }
