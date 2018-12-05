@@ -10,12 +10,14 @@ import {Place} from 'ui/components/Place';
 import {IPlace} from 'store/map/models';
 import {Filter} from 'ui/components/Filter';
 import {SearchBox} from 'ui/components/SearchBox';
-import {setLocationAction} from "store/map/actions";
+import {
+  setLocationAction,
+} from "store/map/actions";
 
 interface IProps {
   mapCenter: LngLatLike
   locations: Array<IPlace>
-  setLocation: (coordination: LngLatLike) => {}
+  selectLocation: (coordination: LngLatLike) => {}
 }
 
 interface IState {
@@ -23,7 +25,7 @@ interface IState {
   selectedPlace: IPlace;
 }
 
-class Map_Page extends React.Component<IProps, IState> {
+class Map_Page extends React.PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -32,7 +34,6 @@ class Map_Page extends React.Component<IProps, IState> {
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleFilteration = this.handleFilteration.bind(this);
-    this.mapCenterChanged = this.mapCenterChanged.bind(this);
     this.setLocation = this.setLocation.bind(this);
   }
 
@@ -45,12 +46,8 @@ class Map_Page extends React.Component<IProps, IState> {
     console.log(option);
   }
 
-  mapCenterChanged(e: any) {
-    console.log(e);
-  }
-
   setLocation(place: IPlace) {
-    this.props.setLocation(place.location);
+    this.props.selectLocation(place.location);
     this.setState({
       selectedPlace: place,
     });
@@ -93,7 +90,7 @@ class Map_Page extends React.Component<IProps, IState> {
         <MapboxContainer
           mapCenter={this.props.mapCenter}
           mapCenterChanged={(e) => {
-            this.mapCenterChanged(e)
+            console.log(e)
           }}
           locations={this.props.locations}
           selectedPlace={this.state.selectedPlace}
@@ -104,9 +101,9 @@ class Map_Page extends React.Component<IProps, IState> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setLocation: (coordination: LngLatLike) => {
+  selectLocation: (coordination: LngLatLike) => {
     dispatch(setLocationAction({coordination}))
-  }
+  },
 });
 const mapStateToProps = (state: any) => ({
   mapCenter: state.map.mapCenter,
