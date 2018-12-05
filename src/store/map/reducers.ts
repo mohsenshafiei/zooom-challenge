@@ -3,6 +3,8 @@ import { ActionTypes } from "./actionTypes";
 
 const initialState: IState = {
   mapCenter: {lng: 13.300021300000026, lat: 47.79544660000002},
+  firstCategory: true,
+  secondCategory: true,
   locations: [
     {
       headline: 'Zooom Productions',
@@ -12,7 +14,7 @@ const initialState: IState = {
       country: 'Austria',
       startDate: '',
       endDate: '',
-      category: '1',
+      category: 1,
       location: [13.3000213, 47.7954466]
     },
     {
@@ -23,7 +25,7 @@ const initialState: IState = {
       country: 'Austria',
       startDate: '',
       endDate: '',
-      category: '1',
+      category: 1,
       location: [13.7642618, 47.4108547]
     },
     {
@@ -34,7 +36,7 @@ const initialState: IState = {
       country: 'Italy',
       startDate: '23 March 2018',
       endDate: '12 October 2017',
-      category: '2',
+      category: 2,
       location: [12.3260093, 45.4359062]
     },
     {
@@ -45,7 +47,7 @@ const initialState: IState = {
       country: 'Switzerland',
       startDate: '12 June 2018',
       endDate: '23 October 2018',
-      category: '1',
+      category: 1,
       location: [8.4666751, 47.3774337]
     },
     {
@@ -56,7 +58,7 @@ const initialState: IState = {
       country: 'Iran',
       startDate: '12 July 2018',
       endDate: '3 November 2018',
-      category: '1',
+      category: 1,
       location: [51.3656438, 35.7581167]
     },
     {
@@ -67,7 +69,7 @@ const initialState: IState = {
       country: 'USA',
       startDate: '26 Oct 2018',
       endDate: '4 November 2018',
-      category: '1',
+      category: 1,
       location: [-84.4455918, 33.7896881]
     },
   ]
@@ -87,6 +89,34 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
       };
     }
     case ActionTypes.SET_LOCATION_REJECTED: {
+      return {
+        ...state,
+      };
+    }
+    case ActionTypes.SET_FILTER_FULFILLED: {
+      console.log(action.payload);
+      if (action.payload === 1) {
+        return {
+          ...state,
+          firstCategory: !state.firstCategory
+        };
+      }
+      if (action.payload === 2) {
+        return {
+          ...state,
+          secondCategory: !state.secondCategory
+        };
+      }
+      return {
+        ...state
+      }
+    }
+    case ActionTypes.SET_FILTER_PENDING: {
+      return {
+        ...state,
+      };
+    }
+    case ActionTypes.SET_FILTER_REJECTED: {
       return {
         ...state,
       };
