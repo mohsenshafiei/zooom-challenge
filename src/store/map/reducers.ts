@@ -2,7 +2,7 @@ import {IState, MapReducerActions} from "./models";
 import { ActionTypes } from "./actionTypes";
 
 const initialState: IState = {
-  mapCenter: [13.3000213, 47.7954466],
+  mapCenter: {lng: 13.300021300000026, lat: 47.79544660000002},
   locations: [
     {
       headline: 'Zooom Productions',
