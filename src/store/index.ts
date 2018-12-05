@@ -7,10 +7,12 @@ import {
 import createSagaMiddleware from 'redux-saga';
 import sagas from 'store/sagas';
 
-import userReducers from "store/User/reducers";
+import userReducers from "store/user/reducers";
+import mapReducers from "store/map/reducers";
 
 const reducers = combineReducers({
   user: userReducers,
+  map: mapReducers,
 });
 
 const sagaMiddleware = createSagaMiddleware();
