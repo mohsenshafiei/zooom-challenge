@@ -20,6 +20,7 @@ interface IProps {
 
 interface IState {
   title: string,
+  selectedPlace: IPlace;
 }
 
 class Map_Page extends React.Component<IProps, IState> {
@@ -27,6 +28,7 @@ class Map_Page extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       title: '',
+      selectedPlace: this.props.locations[0],
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleFilteration = this.handleFilteration.bind(this);
@@ -47,8 +49,11 @@ class Map_Page extends React.Component<IProps, IState> {
     console.log(e);
   }
 
-  setLocation(coordination: LngLatLike) {
-    this.props.setLocation(coordination);
+  setLocation(place: IPlace) {
+    this.props.setLocation(place.location);
+    this.setState({
+      selectedPlace: place,
+    });
   }
 
   public render() {
@@ -67,8 +72,8 @@ class Map_Page extends React.Component<IProps, IState> {
             this.props.locations.map((place, index) => {
               return <Place
                 selectLocation={
-                  (coordination) => {
-                    this.setLocation(coordination)
+                  (place) => {
+                    this.setLocation(place)
                   }
                 }
                 headline={place.headline}
@@ -91,6 +96,7 @@ class Map_Page extends React.Component<IProps, IState> {
             this.mapCenterChanged(e)
           }}
           locations={this.props.locations}
+          selectedPlace={this.state.selectedPlace}
         />
       </div>
     );
