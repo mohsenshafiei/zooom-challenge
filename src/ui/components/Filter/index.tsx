@@ -2,7 +2,7 @@ import * as React from 'react';
 const style = require('./style.scss');
 
 interface IFilterProps {
-  changeFilter: (option: string) => void;
+  changeFilter: (option: number) => void;
 }
 interface IFilterState {
   title: string;
@@ -14,7 +14,7 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
     this.handleFilter = this.handleFilter.bind(this);
   }
 
-  handleFilter(option: string) {
+  handleFilter(option: number) {
     this.props.changeFilter(option);
   }
 
@@ -25,11 +25,21 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
           <h4>Choose Your Category</h4>
           <div className={style.checkboxContainer}>
             <p className={style.checkBoxTitle}>First Category</p>
-            <input className={style.checkBox} type="checkbox" onChange={ (e) => this.handleFilter('First Category')}/>
+            <input
+              className={style.checkBox}
+              type="checkbox"
+              onChange={ (e) => this.handleFilter(1)}
+              defaultChecked={true}
+            />
           </div>
           <div className={style.checkboxContainer}>
             <p className={style.checkBoxTitle}>Second Category</p>
-            <input className={style.checkBox} type="checkbox" onChange={ (e) => this.handleFilter('Second Category')} />
+            <input
+              className={style.checkBox}
+              type="checkbox"
+              onChange={ (e) => this.handleFilter(2)}
+              defaultChecked={true}
+            />
           </div>
         </div>
       </div>
