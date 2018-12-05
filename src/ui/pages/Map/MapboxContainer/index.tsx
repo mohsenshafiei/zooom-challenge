@@ -1,24 +1,22 @@
 import * as React from 'react';
 import * as mapboxgl from 'mapbox-gl';
 import { LngLatLike, LngLat } from 'mapbox-gl';
+import {IPlace} from 'store/map/models';
 import { Map as Mapbox, Marker } from 'ui/components/Mapbox';
 const style = require('./style.scss');
 
 interface MapProps {
   mapCenter: LngLatLike;
-  sourceLocation?: LngLat;
-  destinationLocation?: LngLat;
-  secondDestinationLocation?: LngLat;
-  driverLocation?: LngLat;
-  serviceType?: number;
+  locations: Array<IPlace>;
   mapCenterChanged?: (location: LngLatLike) => void;
+
 }
 
 interface MapState {
   map: mapboxgl.Map | null;
 }
 
-export class MapboxContainer extends React.PureComponent<MapProps, MapState> {
+export class MapboxContainer extends React.Component<MapProps, MapState> {
   constructor(props: MapProps) {
     super(props);
     this.onMapLoad = this.onMapLoad.bind(this);
@@ -34,31 +32,24 @@ export class MapboxContainer extends React.PureComponent<MapProps, MapState> {
       map
     });
   }
-
-  componentDidUpdate(prevProps: MapProps) {
-    if (
-      (this.props.sourceLocation !== prevProps.sourceLocation) ||
-      (this.props.destinationLocation !== prevProps.destinationLocation) ||
-      (this.props.secondDestinationLocation !== prevProps.secondDestinationLocation)
-    ) {
-      const locations = [
-        this.props.sourceLocation,
-        this.props.destinationLocation,
-        this.props.secondDestinationLocation,
-      ].filter((item) => item !== null);
-      this.fitBounds(locations);
-    }
+  componentDidMount() {
+    this.fitBounds(this.props.locations);
   }
 
-  fitBounds(locations: LngLat[]) {
+  componentDidUpdate(prevProps: MapProps) {
+    const { map } = this.state;
+    map.panTo(this.props.mapCenter);
+  }
+
+  fitBounds(locations: Array<IPlace>) {
     const { map } = this.state;
     if (locations.length === 0) return;
 
     if (locations.length === 1) {
-      map.panTo(locations[0]);
+      map.panTo(locations[0].location);
     } else {
       // @ts-ignore
-      const bounds = new mapboxgl.LngLatBounds(locations.map((location) => [location.lng, location.lat]));
+      const bounds = new mapboxgl.LngLatBounds(locations.map((place) => place.location))
       setTimeout(() => {
         map.fitBounds(bounds, {
           padding: {
@@ -73,29 +64,29 @@ export class MapboxContainer extends React.PureComponent<MapProps, MapState> {
   }
 
   render() {
-    const {
-      mapCenter,
-      mapCenterChanged,
-    } = this.props;
-
     return (
       <div className={style.map}>
         <Mapbox
           onLoad={this.onMapLoad}
-          center={mapCenter}
-          onMoveEnd={(location) => { mapCenterChanged(location) }}
+          center={this.props.mapCenter}
+          onMoveEnd={(location) => { this.props.mapCenterChanged(location) }}
           height="calc(100vh - 5em)"
-          zoom={14}
+          zoom={4}
         >
-          <Marker
-            anchor="bottom"
-            icon={{
-              height: 48,
-              width: 48,
-              url: require('assets/images/markers/marker.png')
-            }}
-            position={mapCenter}
-          />
+          {
+            this.props.locations.map((place, index)=> {
+              return <Marker
+                anchor="bottom"
+                icon={{
+                  height: 48,
+                  width: 48,
+                  url: require('assets/images/markers/marker.png')
+                }}
+                position={place.location}
+                key={index}
+              />
+            })
+          }
         </Mapbox>
       </div>
     );
