@@ -11,6 +11,8 @@ interface MapProps {
   mapCenter: LngLatLike;
   selectedPlace: IPlace;
   locations: Array<IPlace>;
+  firstCategory: boolean;
+  secondCategory: boolean;
   mapCenterChanged?: (location: LngLatLike) => void;
 }
 
@@ -18,7 +20,7 @@ interface MapState {
   map: mapboxgl.Map | null;
 }
 
-export class MapboxContainer extends React.PureComponent<MapProps, MapState> {
+export class MapboxContainer extends React.Component<MapProps, MapState> {
   constructor(props: MapProps) {
     super(props);
     this.onMapLoad = this.onMapLoad.bind(this);
@@ -78,16 +80,30 @@ export class MapboxContainer extends React.PureComponent<MapProps, MapState> {
         >
           {
             this.props.locations.map((place, index) => {
-              return <Marker
-                anchor="bottom"
-                icon={{
-                  height: 48,
-                  width: 48,
-                  url: require('assets/images/markers/marker.png')
-                }}
-                position={place.location}
-                key={index}
-              />
+              if (place.category=== 1 && this.props.firstCategory) {
+                return <Marker
+                  anchor="bottom"
+                  icon={{
+                    height: 48,
+                    width: 48,
+                    url: require('assets/images/markers/marker.png')
+                  }}
+                  position={place.location}
+                  key={index}
+                />
+              }
+              if (place.category=== 2 && this.props.secondCategory) {
+                return <Marker
+                  anchor="bottom"
+                  icon={{
+                    height: 48,
+                    width: 48,
+                    url: require('assets/images/markers/marker.png')
+                  }}
+                  position={place.location}
+                  key={index}
+                />
+              }
             })
           }
         </Mapbox>
