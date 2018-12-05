@@ -52,7 +52,7 @@ class Map extends React.Component<MapProps, MapState> {
       const { map } = this.state;
 
       if (map) {
-        this.onMoveEnd(map.getCenter());
+        this.onMoveEnd(map.getCenter().wrap());
       }
     });
   }
