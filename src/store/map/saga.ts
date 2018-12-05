@@ -1,6 +1,6 @@
 import {takeEvery, put} from 'redux-saga/effects';
 import  { ActionTypes } from './actionTypes';
-import { ISetLocation } from "./models";
+import {ISetLocation} from "./models";
 
 function* setLocation(action: ISetLocation) {
   yield put({ type: ActionTypes.SET_LOCATION_PENDING });
