@@ -12,12 +12,16 @@ import {Filter} from 'ui/components/Filter';
 import {SearchBox} from 'ui/components/SearchBox';
 import {
   setLocationAction,
+  setFilteration,
 } from "store/map/actions";
 
 interface IProps {
-  mapCenter: LngLatLike
-  locations: Array<IPlace>
+  mapCenter: LngLatLike;
+  locations: Array<IPlace>;
+  firstCategory: boolean;
+  secondCategory: boolean;
   selectLocation: (coordination: LngLatLike) => {}
+  setFilter: (option: number) => {}
 }
 
 interface IState {
@@ -42,8 +46,9 @@ class Map_Page extends React.PureComponent<IProps, IState> {
     console.log(input);
   }
 
-  handleFilteration(option: string) {
+  handleFilteration(option: number) {
     console.log(option);
+    this.props.setFilter(option)
   }
 
   setLocation(place: IPlace) {
@@ -54,7 +59,6 @@ class Map_Page extends React.PureComponent<IProps, IState> {
   }
 
   public render() {
-
     return (
       <div className={style.container}>
         <Locations>
@@ -67,23 +71,45 @@ class Map_Page extends React.PureComponent<IProps, IState> {
           <h4 className={style.title}>Our Meeting Places</h4>
           {
             this.props.locations.map((place, index) => {
-              return <Place
-                selectLocation={
-                  (place) => {
-                    this.setLocation(place)
+              if (place.category === 1 && this.props.firstCategory) {
+                return <Place
+                  selectLocation={
+                    (place) => {
+                      this.setLocation(place)
+                    }
                   }
-                }
-                headline={place.headline}
-                description={place.description}
-                address={place.address}
-                zip={place.zip}
-                country={place.country}
-                startDate={place.startDate}
-                endDate={place.endDate}
-                category={place.category}
-                location={place.location}
-                key={index}
-              />
+                  headline={place.headline}
+                  description={place.description}
+                  address={place.address}
+                  zip={place.zip}
+                  country={place.country}
+                  startDate={place.startDate}
+                  endDate={place.endDate}
+                  category={place.category}
+                  location={place.location}
+                  key={index}
+                />
+              }
+              if (place.category === 2 && this.props.secondCategory) {
+                return <Place
+                  selectLocation={
+                    (place) => {
+                      this.setLocation(place)
+                    }
+                  }
+                  headline={place.headline}
+                  description={place.description}
+                  address={place.address}
+                  zip={place.zip}
+                  country={place.country}
+                  startDate={place.startDate}
+                  endDate={place.endDate}
+                  category={place.category}
+                  location={place.location}
+                  key={index}
+                />
+              }
+
             })
           }
         </Locations>
@@ -94,6 +120,8 @@ class Map_Page extends React.PureComponent<IProps, IState> {
           }}
           locations={this.props.locations}
           selectedPlace={this.state.selectedPlace}
+          firstCategory={this.props.firstCategory}
+          secondCategory={this.props.secondCategory}
         />
       </div>
     );
@@ -104,10 +132,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   selectLocation: (coordination: LngLatLike) => {
     dispatch(setLocationAction({coordination}))
   },
+  setFilter: (option: number) => {
+    dispatch(setFilteration(option));
+  }
 });
 const mapStateToProps = (state: any) => ({
   mapCenter: state.map.mapCenter,
-  locations: state.map.locations
+  locations: state.map.locations,
+  firstCategory: state.map.firstCategory,
+  secondCategory: state.map.secondCategory,
 });
 
 export const Map = connect(mapStateToProps, mapDispatchToProps)(Map_Page);
