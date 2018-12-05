@@ -1,9 +1,11 @@
 import { all } from 'redux-saga/effects';
-import userSaga from './User/saga';
+import userSaga from './user/saga';
+import mapSaga from './map/saga';
 
 function* sagas() {
   yield all([
     ...userSaga,
+    ...mapSaga,
   ]);
 }
 
