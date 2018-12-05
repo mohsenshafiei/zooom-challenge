@@ -2,14 +2,15 @@ import * as React from 'react';
 import * as mapboxgl from 'mapbox-gl';
 import { LngLatLike, LngLat } from 'mapbox-gl';
 import {IPlace} from 'store/map/models';
+import {Information} from 'ui/components/Information';
 import { Map as Mapbox, Marker } from 'ui/components/Mapbox';
 const style = require('./style.scss');
 
 interface MapProps {
   mapCenter: LngLatLike;
+  selectedPlace: IPlace;
   locations: Array<IPlace>;
   mapCenterChanged?: (location: LngLatLike) => void;
-
 }
 
 interface MapState {
@@ -71,7 +72,7 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
           center={this.props.mapCenter}
           onMoveEnd={(location) => { this.props.mapCenterChanged(location) }}
           height="calc(100vh - 5em)"
-          zoom={4}
+          zoom={6}
         >
           {
             this.props.locations.map((place, index)=> {
@@ -88,6 +89,7 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
             })
           }
         </Mapbox>
+        {this.props.mapCenter === this.props.selectedPlace.location && <Information detail={this.props.selectedPlace}/>}
       </div>
     );
   }
