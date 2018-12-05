@@ -8,7 +8,6 @@ export interface ISetLocation {
   coordination: LngLatLike
 }
 
-
 // REDUCERS ACTIONS =================================
 export interface ISetLocationFulfilled {
   type: ActionTypes.SET_LOCATION_FULFILLED,
@@ -26,7 +25,6 @@ export interface ISetLocationRejected {
 export type MapReducerActions = ISetLocationFulfilled |
   ISetLocationPending |
   ISetLocationRejected;
-
 export interface IPlace {
   headline: string;
   description: string;
