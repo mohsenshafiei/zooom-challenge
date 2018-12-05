@@ -8,6 +8,11 @@ export interface ISetLocation {
   coordination: LngLatLike
 }
 
+export interface ISetFilter {
+  type: ActionTypes.SET_FILTER,
+  option: number
+}
+
 // REDUCERS ACTIONS =================================
 export interface ISetLocationFulfilled {
   type: ActionTypes.SET_LOCATION_FULFILLED,
@@ -22,9 +27,27 @@ export interface ISetLocationRejected {
   type: ActionTypes.SET_LOCATION_REJECTED,
 }
 
+export interface ISetFilterFulfilled {
+  type: ActionTypes.SET_FILTER_FULFILLED,
+  payload: number,
+}
+
+export interface ISetFilterPending {
+  type: ActionTypes.SET_FILTER_PENDING,
+}
+
+export interface ISetFilterRejected {
+  type: ActionTypes.SET_FILTER_REJECTED,
+}
+
 export type MapReducerActions = ISetLocationFulfilled |
   ISetLocationPending |
-  ISetLocationRejected;
+  ISetLocationRejected |
+  ISetFilterFulfilled |
+  ISetFilterPending |
+  ISetFilterRejected;
+
+
 export interface IPlace {
   headline: string;
   description: string;
@@ -33,13 +56,15 @@ export interface IPlace {
   country: string;
   startDate: string;
   endDate: string;
-  category: string;
+  category: number;
   location: LngLatLike;
 }
 // STATE ===============================
 export interface IState {
   mapCenter: LngLatLike;
   locations: Array<IPlace>
+  firstCategory: boolean,
+  secondCategory: boolean,
 }
 
 
