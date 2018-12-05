@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as mapboxgl from 'mapbox-gl';
-import { LngLatLike, LngLat } from 'mapbox-gl';
+import {LngLatLike, LngLat} from 'mapbox-gl';
 import {IPlace} from 'store/map/models';
 import {Information} from 'ui/components/Information';
-import { Map as Mapbox, Marker } from 'ui/components/Mapbox';
+import {Map as Mapbox, Marker} from 'ui/components/Mapbox';
+
 const style = require('./style.scss');
 
 interface MapProps {
@@ -17,7 +18,7 @@ interface MapState {
   map: mapboxgl.Map | null;
 }
 
-export class MapboxContainer extends React.Component<MapProps, MapState> {
+export class MapboxContainer extends React.PureComponent<MapProps, MapState> {
   constructor(props: MapProps) {
     super(props);
     this.onMapLoad = this.onMapLoad.bind(this);
@@ -33,17 +34,18 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
       map
     });
   }
+
   componentDidMount() {
     this.fitBounds(this.props.locations);
   }
 
   componentDidUpdate(prevProps: MapProps) {
-    const { map } = this.state;
+    const {map} = this.state;
     map.panTo(this.props.mapCenter);
   }
 
   fitBounds(locations: Array<IPlace>) {
-    const { map } = this.state;
+    const {map} = this.state;
     if (locations.length === 0) return;
 
     if (locations.length === 1) {
@@ -70,12 +72,12 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
         <Mapbox
           onLoad={this.onMapLoad}
           center={this.props.mapCenter}
-          onMoveEnd={(location) => { this.props.mapCenterChanged(location) }}
+          onMoveEnd={(location) => {this.props.mapCenterChanged(location)}}
           height="calc(100vh - 5em)"
           zoom={6}
         >
           {
-            this.props.locations.map((place, index)=> {
+            this.props.locations.map((place, index) => {
               return <Marker
                 anchor="bottom"
                 icon={{
