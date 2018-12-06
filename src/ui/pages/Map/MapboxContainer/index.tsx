@@ -115,7 +115,6 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
           && <Information
                 detail={this.props.selectedPlace}
                 close={ () => {
-                  console.log('close Details');
                   this.props.closeDetails();
                 }}
             />
