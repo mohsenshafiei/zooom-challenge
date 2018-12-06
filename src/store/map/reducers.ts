@@ -6,6 +6,8 @@ const initialState: IState = {
   firstCategory: true,
   secondCategory: true,
   showDetails: false,
+  searchLocations: [],
+  searchLocationsLoading: false,
   locations: [
     {
       headline: 'Zooom Productions',
@@ -96,7 +98,6 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
       };
     }
     case ActionTypes.SET_FILTER_FULFILLED: {
-      console.log(action.payload);
       if (action.payload === 1) {
         return {
           ...state,
@@ -133,6 +134,26 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
       return {
         ...state,
         showDetails: false,
+      };
+    }
+    case ActionTypes.SEARCH_LOCATIONS_FULFILLED: {
+      return {
+        ...state,
+        searchLocations: action.payload,
+        searchLocationsLoading: false,
+      };
+    }
+    case ActionTypes.SEARCH_LOCATIONS_PENDING: {
+      return {
+        ...state,
+        searchLocationsLoading: true,
+      };
+    }
+    case ActionTypes.SEARCH_LOCATIONS_REJECTED: {
+      return {
+        ...state,
+        searchLocations: [],
+        searchLocationsLoading: false,
       };
     }
     default:
