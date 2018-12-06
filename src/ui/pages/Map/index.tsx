@@ -13,6 +13,7 @@ import {SearchBox} from 'ui/components/SearchBox';
 import {
   setLocationAction,
   setFilteration,
+  closeDetails
 } from "store/map/actions";
 
 interface IProps {
@@ -20,8 +21,10 @@ interface IProps {
   locations: Array<IPlace>;
   firstCategory: boolean;
   secondCategory: boolean;
+  showDetails: boolean;
   selectLocation: (coordination: LngLatLike) => {}
   setFilter: (option: number) => {}
+  closeModalDetails: () => {}
 }
 
 interface IState {
@@ -122,6 +125,10 @@ class Map_Page extends React.PureComponent<IProps, IState> {
           selectedPlace={this.state.selectedPlace}
           firstCategory={this.props.firstCategory}
           secondCategory={this.props.secondCategory}
+          showDetails={this.props.showDetails}
+          closeDetails={ () => {
+            this.props.closeModalDetails()
+          }}
         />
       </div>
     );
@@ -134,6 +141,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   setFilter: (option: number) => {
     dispatch(setFilteration(option));
+  },
+  closeModalDetails: () => {
+    dispatch(closeDetails());
   }
 });
 const mapStateToProps = (state: any) => ({
@@ -141,6 +151,7 @@ const mapStateToProps = (state: any) => ({
   locations: state.map.locations,
   firstCategory: state.map.firstCategory,
   secondCategory: state.map.secondCategory,
+  showDetails: state.map.showDetails,
 });
 
 export const Map = connect(mapStateToProps, mapDispatchToProps)(Map_Page);
