@@ -3,6 +3,7 @@ import {
   ISetLocation,
   ISetLocationPayload,
   ISetFilter,
+  ICloseDetails
 } from "./models";
 
 export const setLocationAction = (payload: ISetLocationPayload): ISetLocation => {
@@ -16,5 +17,11 @@ export const setFilteration = (option: number): ISetFilter => {
   return {
     type: ActionTypes.SET_FILTER,
     option: option
+  }
+};
+
+export const closeDetails = (): ICloseDetails => {
+  return {
+    type: ActionTypes.CLOSE_DETAILS,
   }
 };
