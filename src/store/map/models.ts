@@ -17,6 +17,11 @@ export interface ICloseDetails {
   type: ActionTypes.CLOSE_DETAILS,
 }
 
+export interface ISearchLocation {
+  type: ActionTypes.SEARCH_LOCATIONS,
+  payload: string
+}
+
 // REDUCERS ACTIONS =================================
 export interface ISetLocationFulfilled {
   type: ActionTypes.SET_LOCATION_FULFILLED,
@@ -52,6 +57,19 @@ export interface ICloseDetailsFulfilled {
   type: ActionTypes.CLOSE_DETAILS_FULFILLED,
 }
 
+export interface ISearchLocationFulfilled {
+  type: ActionTypes.SEARCH_LOCATIONS_FULFILLED,
+  payload: Array<any>
+}
+
+export interface ISearchLocationPending {
+  type: ActionTypes.SEARCH_LOCATIONS_PENDING,
+}
+
+export interface ISearchLocationRejected {
+  type: ActionTypes.SEARCH_LOCATIONS_REJECTED,
+}
+
 export type MapReducerActions = ISetLocationFulfilled |
   ISetLocationPending |
   ISetLocationRejected |
@@ -59,7 +77,10 @@ export type MapReducerActions = ISetLocationFulfilled |
   ISetFilterPending |
   ISetFilterRejected |
   IShowDetailsFulfilled |
-  ICloseDetailsFulfilled;
+  ICloseDetailsFulfilled |
+  ISearchLocationFulfilled |
+  ISearchLocationPending |
+  ISearchLocationRejected;
 
 export interface IPlace {
   headline: string;
@@ -79,10 +100,16 @@ export interface IState {
   firstCategory: boolean,
   secondCategory: boolean,
   showDetails: boolean,
+  searchLocations: Array<any>,
+  searchLocationsLoading: boolean,
 }
 
 
 // PAYLOADS ===============================
 export interface ISetLocationPayload {
   coordination: LngLatLike
+}
+
+export interface ISearchLocationPayload {
+  payload: string
 }
