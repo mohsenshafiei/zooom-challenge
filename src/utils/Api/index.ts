@@ -36,6 +36,7 @@ class HttpClient implements IHttpClient {
       headers: {
         'Content-Type': 'application/json',
         'Accept-Language':'fa-IR',
+        'Authentication': process.env.MAPBOX_TOKEN
       }
     });
 
