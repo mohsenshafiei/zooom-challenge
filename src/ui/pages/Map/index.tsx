@@ -7,23 +7,27 @@ import {Locations} from 'ui/components/Locations';
 import {LngLatLike} from 'mapbox-gl';
 import {MapboxContainer} from 'ui/pages/Map/MapboxContainer';
 import {Place} from 'ui/components/Place';
+import {RecommendedPlace} from "ui/components/RecommendedPlace";
 import {IPlace} from 'store/map/models';
 import {Filter} from 'ui/components/Filter';
 import {SearchBox} from 'ui/components/SearchBox';
 import {
   setLocationAction,
   setFilteration,
-  closeDetails
+  closeDetails,
+  searchLocation,
 } from "store/map/actions";
 
 interface IProps {
   mapCenter: LngLatLike;
   locations: Array<IPlace>;
+  searchLocations: Array<any>;
   firstCategory: boolean;
   secondCategory: boolean;
   showDetails: boolean;
   selectLocation: (coordination: LngLatLike) => {}
   setFilter: (option: number) => {}
+  search: (searchInput: string) => {}
   closeModalDetails: () => {}
 }
 
@@ -46,11 +50,10 @@ class Map_Page extends React.PureComponent<IProps, IState> {
 
 
   handleSearch(input: string) {
-    console.log(input);
+    this.props.search(input)
   }
 
   handleFilteration(option: number) {
-    console.log(option);
     this.props.setFilter(option)
   }
 
@@ -68,53 +71,74 @@ class Map_Page extends React.PureComponent<IProps, IState> {
           <SearchBox changeInput={(input) => {
             this.handleSearch(input)
           }}/>
-          <Filter changeFilter={(option) => {
-            this.handleFilteration(option)
-          }}/>
-          <h4 className={style.title}>Our Meeting Places</h4>
           {
-            this.props.locations.map((place, index) => {
-              if (place.category === 1 && this.props.firstCategory) {
-                return <Place
-                  selectLocation={
-                    (place) => {
-                      this.setLocation(place)
+            this.props.searchLocations.length === 0
+            ? <>
+            <Filter changeFilter={(option) => {
+              this.handleFilteration(option)
+            }}/>
+            <h4 className={style.title}>Our Meeting Places</h4>
+            {
+              this.props.locations.map((place, index) => {
+                if (place.category === 1 && this.props.firstCategory) {
+                  return <Place
+                    selectLocation={
+                      (place) => {
+                        this.setLocation(place)
+                      }
                     }
-                  }
-                  headline={place.headline}
-                  description={place.description}
-                  address={place.address}
-                  zip={place.zip}
-                  country={place.country}
-                  startDate={place.startDate}
-                  endDate={place.endDate}
-                  category={place.category}
-                  location={place.location}
-                  key={index}
-                />
-              }
-              if (place.category === 2 && this.props.secondCategory) {
-                return <Place
-                  selectLocation={
-                    (place) => {
-                      this.setLocation(place)
+                    headline={place.headline}
+                    description={place.description}
+                    address={place.address}
+                    zip={place.zip}
+                    country={place.country}
+                    startDate={place.startDate}
+                    endDate={place.endDate}
+                    category={place.category}
+                    location={place.location}
+                    key={index}
+                  />
+                }
+                if (place.category === 2 && this.props.secondCategory) {
+                  return <Place
+                    selectLocation={
+                      (place) => {
+                        this.setLocation(place)
+                      }
                     }
-                  }
-                  headline={place.headline}
-                  description={place.description}
-                  address={place.address}
-                  zip={place.zip}
-                  country={place.country}
-                  startDate={place.startDate}
-                  endDate={place.endDate}
-                  category={place.category}
-                  location={place.location}
-                  key={index}
-                />
+                    headline={place.headline}
+                    description={place.description}
+                    address={place.address}
+                    zip={place.zip}
+                    country={place.country}
+                    startDate={place.startDate}
+                    endDate={place.endDate}
+                    category={place.category}
+                    location={place.location}
+                    key={index}
+                  />
+                }
+              })
+            }
+            </> : <>
+              <h4 className={style.title}>Search Results</h4>
+              {
+                this.props.searchLocations.map((place, index) => {
+                  return <RecommendedPlace
+                    selectLocation={
+                      (place) => {
+                        this.setLocation(place)
+                      }
+                    }
+                    headline={place.place_name}
+                    location={place.center}
+                    key={index}
+                  />
+                })
               }
-
-            })
+              </>
           }
+
         </Locations>
         <MapboxContainer
           mapCenter={this.props.mapCenter}
@@ -126,7 +150,7 @@ class Map_Page extends React.PureComponent<IProps, IState> {
           firstCategory={this.props.firstCategory}
           secondCategory={this.props.secondCategory}
           showDetails={this.props.showDetails}
-          closeDetails={ () => {
+          closeDetails={() => {
             this.props.closeModalDetails()
           }}
         />
@@ -144,6 +168,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   closeModalDetails: () => {
     dispatch(closeDetails());
+  },
+  search: (searchInput: string) => {
+    dispatch(searchLocation(searchInput));
   }
 });
 const mapStateToProps = (state: any) => ({
@@ -152,6 +179,7 @@ const mapStateToProps = (state: any) => ({
   firstCategory: state.map.firstCategory,
   secondCategory: state.map.secondCategory,
   showDetails: state.map.showDetails,
+  searchLocations: state.map.searchLocations,
 });
 
 export const Map = connect(mapStateToProps, mapDispatchToProps)(Map_Page);
