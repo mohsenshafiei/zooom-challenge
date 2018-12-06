@@ -13,7 +13,9 @@ interface MapProps {
   locations: Array<IPlace>;
   firstCategory: boolean;
   secondCategory: boolean;
+  showDetails: boolean
   mapCenterChanged?: (location: LngLatLike) => void;
+  closeDetails?: () => void;
 }
 
 interface MapState {
@@ -107,7 +109,17 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
             })
           }
         </Mapbox>
-        {this.props.mapCenter === this.props.selectedPlace.location && <Information detail={this.props.selectedPlace}/>}
+        {
+          (this.props.mapCenter === this.props.selectedPlace.location)
+          && this.props.showDetails
+          && <Information
+                detail={this.props.selectedPlace}
+                close={ () => {
+                  console.log('close Details');
+                  this.props.closeDetails();
+                }}
+            />
+        }
       </div>
     );
   }
