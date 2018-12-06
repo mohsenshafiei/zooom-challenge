@@ -9,10 +9,12 @@ import sagas from 'store/sagas';
 
 import userReducers from "store/user/reducers";
 import mapReducers from "store/map/reducers";
+import uiReducers from "store/ui/reducers";
 
 const reducers = combineReducers({
   user: userReducers,
   map: mapReducers,
+  userInterface: uiReducers,
 });
 
 const sagaMiddleware = createSagaMiddleware();
