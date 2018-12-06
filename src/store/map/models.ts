@@ -13,6 +13,10 @@ export interface ISetFilter {
   option: number
 }
 
+export interface ICloseDetails {
+  type: ActionTypes.CLOSE_DETAILS,
+}
+
 // REDUCERS ACTIONS =================================
 export interface ISetLocationFulfilled {
   type: ActionTypes.SET_LOCATION_FULFILLED,
@@ -40,13 +44,22 @@ export interface ISetFilterRejected {
   type: ActionTypes.SET_FILTER_REJECTED,
 }
 
+export interface IShowDetailsFulfilled {
+  type: ActionTypes.SHOW_DETAILS_FULFILLED,
+}
+
+export interface ICloseDetailsFulfilled {
+  type: ActionTypes.CLOSE_DETAILS_FULFILLED,
+}
+
 export type MapReducerActions = ISetLocationFulfilled |
   ISetLocationPending |
   ISetLocationRejected |
   ISetFilterFulfilled |
   ISetFilterPending |
-  ISetFilterRejected;
-
+  ISetFilterRejected |
+  IShowDetailsFulfilled |
+  ICloseDetailsFulfilled;
 
 export interface IPlace {
   headline: string;
@@ -65,6 +78,7 @@ export interface IState {
   locations: Array<IPlace>
   firstCategory: boolean,
   secondCategory: boolean,
+  showDetails: boolean,
 }
 
 
