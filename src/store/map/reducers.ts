@@ -5,6 +5,7 @@ const initialState: IState = {
   mapCenter: {lng: 13.300021300000026, lat: 47.79544660000002},
   firstCategory: true,
   secondCategory: true,
+  showDetails: false,
   locations: [
     {
       headline: 'Zooom Productions',
@@ -80,7 +81,8 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
     case ActionTypes.SET_LOCATION_FULFILLED: {
       return {
         ...state,
-        mapCenter: action.payload
+        mapCenter: action.payload,
+        showDetails: true
       };
     }
     case ActionTypes.SET_LOCATION_PENDING: {
@@ -119,6 +121,18 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
     case ActionTypes.SET_FILTER_REJECTED: {
       return {
         ...state,
+      };
+    }
+    case ActionTypes.SHOW_DETAILS_FULFILLED: {
+      return {
+        ...state,
+        showDetails: true,
+      };
+    }
+    case ActionTypes.CLOSE_DETAILS_FULFILLED: {
+      return {
+        ...state,
+        showDetails: false,
       };
     }
     default:
