@@ -12,6 +12,7 @@ function* setLocation(action: ISetLocation) {
   yield put({ type: ActionTypes.SET_LOCATION_PENDING });
   yield put({ type: ActionTypes.SET_LOCATION_FULFILLED, payload: action.coordination });
   yield put({ type: ActionTypes.SHOW_DETAILS_FULFILLED });
+  yield put({ type: "CLOSE_NAVIGATION" });
 }
 
 function* setFilter(action: ISetFilter) {

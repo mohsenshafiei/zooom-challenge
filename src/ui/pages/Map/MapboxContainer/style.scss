@@ -4,4 +4,7 @@
   right: 0;
   top: 5em;
   bottom: -1;
+  @media (max-width: 1148px) {
+    width: 100%;
+  }
 }
