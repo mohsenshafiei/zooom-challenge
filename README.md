@@ -32,9 +32,6 @@ npm start
 Other useful commands:
 
 ```bash
-# Build the project in a development mode
-npm run build:dev
-
 # Build the project in a production mode
-npm run build:prod
+npm run build
 ```
