@@ -1,0 +1,10 @@
+{
+  "name": "Zooom Challenge",
+  "short_name": "Zooom Challenge",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#212121",
+  "theme_color": "#212121",
+  "description": "Zooom productions web application",
+  "orientation": "portrait-primary"
+}

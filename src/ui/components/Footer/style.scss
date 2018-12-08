@@ -1,0 +1,19 @@
+.footer {
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2.5em;
+    background-color: #FF5200;
+    min-width: 20em;
+    width: 100%;
+    text-align: center;
+    padding-top: .8em;
+}
+
+.copyRight {
+  text-decoration: none;
+  color: white;
+  font-size: 0.8em;
+}
