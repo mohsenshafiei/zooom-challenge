@@ -7,6 +7,11 @@ import {Map as Mapbox, Marker} from 'ui/components/Mapbox';
 
 const style = require('./style.scss');
 
+interface ISetMarker {
+  headline: string,
+  location: LngLatLike
+}
+
 interface MapProps {
   mapCenter: LngLatLike;
   selectedPlace: IPlace;
@@ -16,6 +21,7 @@ interface MapProps {
   showDetails: boolean
   mapCenterChanged?: (location: LngLatLike) => void;
   closeDetails?: () => void;
+  setMarker?: (place: ISetMarker) => void;
 }
 
 interface MapState {
@@ -40,7 +46,9 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
   }
 
   componentDidMount() {
-    this.fitBounds(this.props.locations);
+    if (this.props.locations) {
+      this.fitBounds(this.props.locations);
+    }
   }
 
   componentDidUpdate(prevProps: MapProps) {
@@ -56,7 +64,8 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
       map.panTo(locations[0].location);
     } else {
       // @ts-ignore
-      const bounds = new mapboxgl.LngLatBounds(locations.map((place) => place.location))
+      const bounds = new mapboxgl.LngLatBounds(locations.map((place) => place.location));
+      console.log(bounds);
       setTimeout(() => {
         map.fitBounds(bounds, {
           padding: {
@@ -76,13 +85,17 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
         <Mapbox
           onLoad={this.onMapLoad}
           center={this.props.mapCenter}
-          onMoveEnd={(location) => {this.props.mapCenterChanged(location)}}
+          firstCategory={this.props.firstCategory}
+          secondCategory={this.props.secondCategory}
+          onMoveEnd={(location) => {
+            this.props.mapCenterChanged(location)
+          }}
           height="calc(100vh - 5em)"
           zoom={6}
         >
           {
             this.props.locations.map((place, index) => {
-              if (place.category=== 1 && this.props.firstCategory) {
+              if (place.category === 1 && this.props.firstCategory) {
                 return <Marker
                   anchor="bottom"
                   icon={{
@@ -93,18 +106,21 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
                   position={place.location}
                   key={index}
                 />
-              }
-              if (place.category=== 2 && this.props.secondCategory) {
-                return <Marker
-                  anchor="bottom"
-                  icon={{
-                    height: 48,
-                    width: 48,
-                    url: require('assets/images/markers/marker.png')
-                  }}
-                  position={place.location}
-                  key={index}
-                />
+              } else {
+                if (place.category === 2 && this.props.secondCategory) {
+                  return <Marker
+                    anchor="bottom"
+                    icon={{
+                      height: 48,
+                      width: 48,
+                      url: require('assets/images/markers/marker.png')
+                    }}
+                    position={place.location}
+                    key={index}
+                  />
+                } else {
+                  return null
+                }
               }
             })
           }
@@ -113,11 +129,15 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
           (this.props.mapCenter === this.props.selectedPlace.location)
           && this.props.showDetails
           && <Information
-                detail={this.props.selectedPlace}
-                close={ () => {
-                  this.props.closeDetails();
-                }}
-            />
+            detail={this.props.selectedPlace}
+            close={() => {
+              this.props.closeDetails();
+            }}
+            setMarker={(headline) => {
+              const payload = {headline: headline, location: this.props.mapCenter};
+              this.props.setMarker(payload);
+            }}
+          />
         }
       </div>
     );

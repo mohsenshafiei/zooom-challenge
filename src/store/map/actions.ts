@@ -5,7 +5,9 @@ import {
   ISetFilter,
   ICloseDetails,
   ISearchLocationPayload,
-  ISearchLocation
+  ISearchLocation,
+  ISetMarkerOnMapPayload,
+  ISetMarker
 } from "./models";
 
 export const setLocationAction = (payload: ISetLocationPayload): ISetLocation => {
@@ -31,6 +33,13 @@ export const closeDetails = (): ICloseDetails => {
 export const searchLocation = (payload: string): ISearchLocation => {
   return {
     type: ActionTypes.SEARCH_LOCATIONS,
+    payload: payload,
+  }
+};
+
+export const setMarkerOnMap = (payload: ISetMarkerOnMapPayload): ISetMarker => {
+  return {
+    type: ActionTypes.SET_MARKER,
     payload: payload,
   }
 };

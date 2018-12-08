@@ -22,6 +22,14 @@ export interface ISearchLocation {
   payload: string
 }
 
+export interface ISetMarker {
+  type: ActionTypes.SET_MARKER,
+  payload: {
+    headline: string,
+    location:LngLatLike,
+  }
+}
+
 // REDUCERS ACTIONS =================================
 export interface ISetLocationFulfilled {
   type: ActionTypes.SET_LOCATION_FULFILLED,
@@ -70,6 +78,22 @@ export interface ISearchLocationRejected {
   type: ActionTypes.SEARCH_LOCATIONS_REJECTED,
 }
 
+export interface ISetMarkerFulfilled {
+  type: ActionTypes.SET_MARKER_FULFILLED,
+  payload: {
+    headline: string,
+    location: LngLatLike
+  }
+}
+
+export interface ISetMarkerPending {
+  type: ActionTypes.SET_MARKER_PENDING,
+}
+
+export interface ISetMarkerRejected {
+  type: ActionTypes.SET_MARKER_REJECTED,
+}
+
 export type MapReducerActions = ISetLocationFulfilled |
   ISetLocationPending |
   ISetLocationRejected |
@@ -80,7 +104,10 @@ export type MapReducerActions = ISetLocationFulfilled |
   ICloseDetailsFulfilled |
   ISearchLocationFulfilled |
   ISearchLocationPending |
-  ISearchLocationRejected;
+  ISearchLocationRejected |
+  ISetMarkerFulfilled |
+  ISetMarkerPending |
+  ISetMarkerRejected;
 
 export interface IPlace {
   headline: string;
@@ -112,4 +139,9 @@ export interface ISetLocationPayload {
 
 export interface ISearchLocationPayload {
   payload: string
+}
+
+export interface ISetMarkerOnMapPayload {
+    location: LngLatLike,
+    headline: string
 }

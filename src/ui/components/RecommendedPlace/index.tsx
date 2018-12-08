@@ -9,7 +9,6 @@ interface IRecommendedPlaceProps {
   selectLocation: (place: IPlace) => void
 }
 interface IRecommendedPlaceState {
-  title: string;
 }
 
 export class RecommendedPlace extends React.PureComponent<IRecommendedPlaceProps, IRecommendedPlaceState> {

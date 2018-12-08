@@ -7,7 +7,6 @@ interface ISearchBoxProps {
 }
 
 interface ISearchBoxState {
-  title: string;
 }
 
 export class SearchBox extends React.PureComponent<ISearchBoxProps, ISearchBoxState> {

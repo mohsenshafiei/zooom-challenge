@@ -15,7 +15,6 @@ interface IHeaderProps {
 }
 
 interface IHeaderState {
-  title: string;
 }
 
 export class DumbHeader extends React.PureComponent<IHeaderProps, IHeaderState> {
@@ -24,10 +23,20 @@ export class DumbHeader extends React.PureComponent<IHeaderProps, IHeaderState> 
       <header className={style.header}>
         <a href="#" className={style.title}>Zooom</a>
         <img
-          src={this.props.navigation ? require('assets/images/cancel.png') : require('assets/images/lines.png') }
-          className={this.props.navigation ? style.cancel : style.icon}
+          src={
+            this.props.navigation ?
+            require('assets/images/cancel.png') :
+            require('assets/images/lines.png')
+          }
+          className={
+            this.props.navigation ?
+              style.cancel :
+              style.icon
+          }
           onClick={ () => {
-            this.props.navigation ? this.props.closeNavigation() : this.props.openNavigation();
+            this.props.navigation ?
+              this.props.closeNavigation() :
+              this.props.openNavigation();
           }}
         />
       </header>

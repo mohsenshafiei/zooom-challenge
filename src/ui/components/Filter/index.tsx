@@ -5,7 +5,6 @@ interface IFilterProps {
   changeFilter: (option: number) => void;
 }
 interface IFilterState {
-  title: string;
 }
 
 export class Filter extends React.PureComponent<IFilterProps, IFilterState> {

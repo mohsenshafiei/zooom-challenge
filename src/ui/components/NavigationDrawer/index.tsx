@@ -7,7 +7,6 @@ interface INavigationDrawerProps {
   visible: boolean
 }
 interface INavigationDrawerState {
-  title: string;
 }
 
 export class NavigationDrawer extends React.PureComponent<INavigationDrawerProps, INavigationDrawerState> {
