@@ -1,13 +1,15 @@
 import * as React from 'react';
 import * as MapboxGL from 'mapbox-gl';
-import {accessToken} from "mapbox-gl";
 
 interface MapProps {
-  center: MapboxGL.LngLat | MapboxGL.LngLatLike;
+  center: MapboxGL.LngLatLike;
   zoom: number;
   height: string;
+  firstCategory: boolean,
+  secondCategory: boolean,
   children?: React.ReactNode;
-  onLoad: (map: MapboxGL.Map) => void;
+  moveTo?: MapboxGL.LngLatLike;
+  onLoad?: (map: MapboxGL.Map) => void;
   onMoveStart?: (data: MapboxGL.MapDataEvent) => void;
   onMoveEnd?: (mapCenter: MapboxGL.LngLatLike) => void;
 }
@@ -33,13 +35,21 @@ class Map extends React.Component<MapProps, MapState> {
       zoom,
     } = this.props;
     Object.getOwnPropertyDescriptor(MapboxGL, "accessToken").set(process.env.MAPBOX_TOKEN);
-    const mapOptions: MapboxGL.MapboxOptions = Object.assign(
-      {
+    const mapOptions: MapboxGL.MapboxOptions = Object.assign({
       container: (this.container.current) as HTMLDivElement,
       style: 'mapbox://styles/mapbox/streets-v9',
       trackResize: true,
     }, { center, zoom });
-    let map: MapboxGL.Map = new MapboxGL.Map(mapOptions);
+
+    const map: MapboxGL.Map = new MapboxGL.Map(mapOptions);
+
+    map.addControl(new MapboxGL.GeolocateControl({
+      trackUserLocation: true,
+      positionOptions: {
+        enableHighAccuracy: true,
+      }
+    }), 'top-left');
+
     map.on('load', () => {
       this.onLoad(map);
     });
@@ -52,7 +62,7 @@ class Map extends React.Component<MapProps, MapState> {
       const { map } = this.state;
 
       if (map) {
-        this.onMoveEnd(map.getCenter().wrap());
+        this.onMoveEnd(map.getCenter());
       }
     });
   }
@@ -85,7 +95,6 @@ class Map extends React.Component<MapProps, MapState> {
   render() {
     const { map } = this.state;
     const { height, children } = this.props;
-
     return (
       <div
         ref={this.container}
@@ -93,9 +102,11 @@ class Map extends React.Component<MapProps, MapState> {
         style={{ height }}
       >
         {map
-        && React.Children.map(children, (child: any) => (
-          child && (<child.type {...child.props} map={map} />)
-        ))
+        && React.Children.map(this.props.children, (child: any) => {
+          if (child) {
+            return <child.type {...child.props} map={map}/>
+          }
+        })
         }
       </div>
     );

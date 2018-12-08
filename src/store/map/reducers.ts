@@ -73,7 +73,7 @@ const initialState: IState = {
       startDate: '26 Oct 2018',
       endDate: '4 November 2018',
       category: 1,
-      location: [-84.4455918, 33.7896881]
+      location: [13.3000213, 47.7954466]
     },
   ]
 };
@@ -101,13 +101,13 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
       if (action.payload === 1) {
         return {
           ...state,
-          firstCategory: !state.firstCategory
+          firstCategory: !state.firstCategory,
         };
       }
       if (action.payload === 2) {
         return {
           ...state,
-          secondCategory: !state.secondCategory
+          secondCategory: !state.secondCategory,
         };
       }
       return {
@@ -154,6 +154,36 @@ const mapReducers = (state: IState = initialState, action: MapReducerActions): I
         ...state,
         searchLocations: [],
         searchLocationsLoading: false,
+      };
+    }
+    case ActionTypes.SET_MARKER_FULFILLED: {
+      return {
+        ...state,
+        locations: [
+          ...state.locations,
+          {
+            headline: action.payload.headline,
+            description: '',
+            address: '',
+            zip: '',
+            country: '',
+            startDate: '',
+            endDate: '',
+            category: 2,
+            location: action.payload.location
+          }
+        ],
+        showDetails: false,
+      };
+    }
+    case ActionTypes.SET_MARKER_PENDING: {
+      return {
+        ...state,
+      };
+    }
+    case ActionTypes.SET_MARKER_REJECTED: {
+      return {
+        ...state,
       };
     }
     default:

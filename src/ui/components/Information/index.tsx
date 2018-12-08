@@ -6,6 +6,7 @@ import {closeDetails} from "store/map/actions";
 interface IInformationProps {
   detail: IPlace,
   close: () => void;
+  setMarker: (headline: string) => void;
 }
 interface IInformationState {
 }
@@ -31,6 +32,10 @@ export class Information extends React.PureComponent<IInformationProps, IInforma
           <p><strong>Country: </strong>{this.props.detail.country}</p>
           <p><strong>Start Date: </strong>{this.props.detail.startDate}</p>
           <p><strong>End Date: </strong>{this.props.detail.endDate}</p>
+          {
+            !this.props.detail.description &&
+            <button onClick={() => {this.props.setMarker(this.props.detail.headline)}}>Set Marker</button>
+          }
         </div>
       </div>
     );
