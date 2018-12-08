@@ -8,7 +8,6 @@ interface IInformationProps {
   close: () => void;
 }
 interface IInformationState {
-  title: string;
 }
 
 export class Information extends React.PureComponent<IInformationProps, IInformationState> {

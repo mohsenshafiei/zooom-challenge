@@ -40,7 +40,9 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
   }
 
   componentDidMount() {
-    this.fitBounds(this.props.locations);
+    if (this.props.locations) {
+      this.fitBounds(this.props.locations);
+    }
   }
 
   componentDidUpdate(prevProps: MapProps) {
@@ -56,7 +58,8 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
       map.panTo(locations[0].location);
     } else {
       // @ts-ignore
-      const bounds = new mapboxgl.LngLatBounds(locations.map((place) => place.location))
+      const bounds = new mapboxgl.LngLatBounds(locations.map((place) => place.location));
+      console.log(bounds);
       setTimeout(() => {
         map.fitBounds(bounds, {
           padding: {

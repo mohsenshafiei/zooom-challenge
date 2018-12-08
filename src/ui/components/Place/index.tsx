@@ -16,7 +16,6 @@ interface IPlaceProps {
   selectLocation: (place: IPlace) => void
 }
 interface IPlaceState {
-  title: string;
 }
 
 export class Place extends React.PureComponent<IPlaceProps, IPlaceState> {
@@ -39,7 +38,9 @@ export class Place extends React.PureComponent<IPlaceProps, IPlaceState> {
   }
   render() {
     return (
-      <div className={style.place} onClick={(e) => { this.select(this.props.location) }}>
+      <div
+        className={style.place}
+        onClick={(e) => { this.select(this.props.location) }}>
         <div className={style.informationContainer}>
           <p className={style.headline}>{this.props.headline}</p>
           <p>{this.props.country}</p>

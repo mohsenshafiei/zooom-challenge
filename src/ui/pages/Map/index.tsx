@@ -39,7 +39,7 @@ interface IState {
   selectedPlace: IPlace;
 }
 
-class Map_Page extends React.PureComponent<IProps, IState> {
+class Map_Page extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -76,54 +76,54 @@ class Map_Page extends React.PureComponent<IProps, IState> {
           }}/>
           {
             this.props.searchLocations.length === 0
-            ? <>
-            <Filter changeFilter={(option) => {
-              this.handleFilteration(option)
-            }}/>
-            <h4 className={style.title}>Our Meeting Places</h4>
-            {
-              this.props.locations.map((place, index) => {
-                if (place.category === 1 && this.props.firstCategory) {
-                  return <Place
-                    selectLocation={
-                      (place) => {
-                        this.setLocation(place)
+              ? <>
+              <Filter changeFilter={(option) => {
+                this.handleFilteration(option)
+              }}/>
+              <h4 className={style.title}>Our Meeting Places</h4>
+              {
+                this.props.locations.map((place, index) => {
+                  if (place.category === 1 && this.props.firstCategory) {
+                    return <Place
+                      selectLocation={
+                        (place) => {
+                          this.setLocation(place)
+                        }
                       }
-                    }
-                    headline={place.headline}
-                    description={place.description}
-                    address={place.address}
-                    zip={place.zip}
-                    country={place.country}
-                    startDate={place.startDate}
-                    endDate={place.endDate}
-                    category={place.category}
-                    location={place.location}
-                    key={index}
-                  />
-                }
-                if (place.category === 2 && this.props.secondCategory) {
-                  return <Place
-                    selectLocation={
-                      (place) => {
-                        this.setLocation(place)
+                      headline={place.headline}
+                      description={place.description}
+                      address={place.address}
+                      zip={place.zip}
+                      country={place.country}
+                      startDate={place.startDate}
+                      endDate={place.endDate}
+                      category={place.category}
+                      location={place.location}
+                      key={index}
+                    />
+                  }
+                  if (place.category === 2 && this.props.secondCategory) {
+                    return <Place
+                      selectLocation={
+                        (place) => {
+                          this.setLocation(place)
+                        }
                       }
-                    }
-                    headline={place.headline}
-                    description={place.description}
-                    address={place.address}
-                    zip={place.zip}
-                    country={place.country}
-                    startDate={place.startDate}
-                    endDate={place.endDate}
-                    category={place.category}
-                    location={place.location}
-                    key={index}
-                  />
-                }
-              })
-            }
-            </> : <>
+                      headline={place.headline}
+                      description={place.description}
+                      address={place.address}
+                      zip={place.zip}
+                      country={place.country}
+                      startDate={place.startDate}
+                      endDate={place.endDate}
+                      category={place.category}
+                      location={place.location}
+                      key={index}
+                    />
+                  }
+                })
+              }
+              </> : <>
               <h4 className={style.title}>Search Results</h4>
               {
                 this.props.searchLocations.map((place, index) => {

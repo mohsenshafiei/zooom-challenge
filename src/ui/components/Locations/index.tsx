@@ -6,7 +6,6 @@ interface ILocationsProps {
   children: React.ReactNode
 }
 interface ILocationsState {
-  title: string;
 }
 
 export class Locations extends React.PureComponent<ILocationsProps, ILocationsState> {
