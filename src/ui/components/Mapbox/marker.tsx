@@ -13,16 +13,23 @@ interface MarkerState {
   readonly marker: MapboxGL.Marker | null;
 }
 
-export default class Marker extends React.Component<MarkerProps, MarkerState> {
+export default class Marker extends React.PureComponent<MarkerProps, MarkerState> {
   constructor(props: MarkerProps) {
     super(props);
   }
 
   readonly state: MarkerState = {
     marker: null,
-  };
+  }
 
   componentWillReceiveProps() {
+    this.configMarker();
+  }
+
+  componentDidMount() {
+    this.configMarker();
+  }
+  configMarker() {
     if (this.state.marker) {
       this.state.marker.remove();
     }
@@ -47,11 +54,11 @@ export default class Marker extends React.Component<MarkerProps, MarkerState> {
     });
 
     marker.setLngLat(position).addTo(map);
-
     this.setState({
       marker,
     });
   }
+
   componentWillUnmount() {
     const { marker } = this.state;
 
