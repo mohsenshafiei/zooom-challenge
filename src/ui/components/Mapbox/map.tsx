@@ -65,6 +65,7 @@ class Map extends React.Component<MapProps, MapState> {
         this.onMoveEnd(map.getCenter());
       }
     });
+
   }
 
   componentWillUnmount() {
@@ -101,10 +102,10 @@ class Map extends React.Component<MapProps, MapState> {
         className="mapbox"
         style={{ height }}
       >
-        {map
-        && React.Children.map(this.props.children, (child: any) => {
+        {this.state.map
+        && React.Children.map(children, (child: any) => {
           if (child) {
-            return <child.type {...child.props} map={map}/>
+            return <child.type {...child.props} map={this.state.map}/>
           }
         })
         }

@@ -34,7 +34,10 @@ export class Information extends React.PureComponent<IInformationProps, IInforma
           <p><strong>End Date: </strong>{this.props.detail.endDate}</p>
           {
             !this.props.detail.description &&
-            <button onClick={() => {this.props.setMarker(this.props.detail.headline)}}>Set Marker</button>
+            <button
+              className={style.setMarkerButton}
+              onClick={() => {this.props.setMarker(this.props.detail.headline)}}
+            >Set Marker</button>
           }
         </div>
       </div>
