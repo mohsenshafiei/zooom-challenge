@@ -19,6 +19,7 @@ function* setLocation(action: ISetLocation) {
 function* setFilter(action: ISetFilter) {
   yield put({ type: ActionTypes.SET_FILTER_PENDING });
   yield put({ type: ActionTypes.SET_FILTER_FULFILLED, payload: action.option});
+  yield put({ type: ActionTypes.CLOSE_DETAILS_FULFILLED });
 }
 
 function* closeDetails(action: ICloseDetails) {

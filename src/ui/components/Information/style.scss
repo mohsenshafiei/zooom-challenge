@@ -1,6 +1,5 @@
 .information {
   position: absolute;
-  top: 50%;
   left: 45%;
   transition: translate(-50%, -50%);
   z-index: 1000000;
@@ -17,11 +16,14 @@
   box-shadow: 4px 13px 30px 6px rgba(0,0,0,0.34);
   @media (max-width: 768px) {
     left: 0;
-    top: 61%;
-    bottom: 0;
+    bottom: 1.5em;
     right: 0;
     width: 100%;
     border-radius: 0;
+    padding-bottom: 1em;
+  }
+  @media (min-width: 768px) {
+    top: 50%;
   }
 }
 
@@ -34,4 +36,18 @@
 .closeButton {
   float: right;
   cursor: pointer;
+}
+
+.setMarkerButton {
+  float: right;
+  box-shadow: none;
+  outline: none;
+  background-color: #FF5200;
+  font-size: 1em;
+  border: 2px solid #FF5200;
+  padding: 1em;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  font-weight: 600;
 }
