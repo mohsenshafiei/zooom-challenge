@@ -18,6 +18,7 @@ interface IHeaderState {
 }
 
 export class DumbHeader extends React.PureComponent<IHeaderProps, IHeaderState> {
+
   render() {
     return (
       <header className={style.header}>
