@@ -90,7 +90,7 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
           onMoveEnd={(location) => {
             this.props.mapCenterChanged(location)
           }}
-          height="calc(100vh - 5em)"
+          height="calc(100vh - 6.5em)"
           zoom={6}
         >
           {
