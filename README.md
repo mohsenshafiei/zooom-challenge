@@ -15,7 +15,7 @@ Before you can start running this project, make sure you have the following soft
 
 ## How to Use
 
-In order to grab a copy of the project and run it, you have to clone it via `Git` and then run the following command:
+In order to grab a copy of the project and run it, you have to clone it via `Git` and set your MAPBOX_TOKEN in .env file then run the following command:
 
 ```bash
 # Install project dependencies
