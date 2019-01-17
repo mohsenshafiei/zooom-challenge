@@ -1,19 +1,17 @@
-import * as React from 'react';
-const style = require('./style.scss');
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import {Link} from "react-router-dom";
+import * as React from "react";
+const style = require("./style.scss");
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { Link } from "react-router-dom";
 
-interface IProps {
-}
-interface IState {
-}
+interface IProps {}
+interface IState {}
 
 class Home_Page extends React.Component<IProps, IState> {
-  constructor(props: IProps){
+  constructor(props: IProps) {
     super(props);
     this.state = {
-      title: '',
+      title: ""
     };
   }
 
@@ -23,14 +21,18 @@ class Home_Page extends React.Component<IProps, IState> {
         <div className={style.mottoContainer}>
           <h4 className={style.brand}> Zooom Productions</h4>
           <p className={style.motto}> Building Better Brands</p>
-          <Link className={style.mapLink} to={'map'}>Go to Map</Link>
+          <Link className={style.mapLink} to={"map"}>
+            Go to Map
+          </Link>
         </div>
       </div>
     );
   }
-};
+}
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-});
+const mapDispatchToProps = (dispatch: Dispatch) => ({});
 
-export const Home =  connect(null, mapDispatchToProps)(Home_Page);
+export const Home = connect(
+  null,
+  mapDispatchToProps
+)(Home_Page);

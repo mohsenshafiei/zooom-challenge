@@ -1,15 +1,15 @@
-import * as React from 'react';
-import * as mapboxgl from 'mapbox-gl';
-import {LngLatLike, LngLat} from 'mapbox-gl';
-import {IPlace} from 'store/map/models';
-import {Information} from 'ui/components/Information';
-import {Map as Mapbox, Marker} from 'ui/components/Mapbox';
+import * as React from "react";
+import * as mapboxgl from "mapbox-gl";
+import { LngLatLike, LngLat } from "mapbox-gl";
+import { IPlace } from "store/map/models";
+import { Information } from "ui/components/Information";
+import { Map as Mapbox, Marker } from "ui/components/Mapbox";
 
-const style = require('./style.scss');
+const style = require("./style.scss");
 
 interface ISetMarker {
-  headline: string,
-  location: LngLatLike
+  headline: string;
+  location: LngLatLike;
 }
 
 interface MapProps {
@@ -18,7 +18,7 @@ interface MapProps {
   locations: Array<IPlace>;
   firstCategory: boolean;
   secondCategory: boolean;
-  showDetails: boolean
+  showDetails: boolean;
   mapCenterChanged?: (location: LngLatLike) => void;
   closeDetails?: () => void;
   setMarker?: (place: ISetMarker) => void;
@@ -36,7 +36,7 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
   }
 
   readonly state: MapState = {
-    map: null,
+    map: null
   };
 
   onMapLoad(map: mapboxgl.Map) {
@@ -52,19 +52,21 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
   }
 
   componentDidUpdate(prevProps: MapProps) {
-    const {map} = this.state;
+    const { map } = this.state;
     map.panTo(this.props.mapCenter);
   }
 
   fitBounds(locations: Array<IPlace>) {
-    const {map} = this.state;
+    const { map } = this.state;
     if (locations.length === 0) return;
 
     if (locations.length === 1) {
       map.panTo(locations[0].location);
     } else {
-      // @ts-ignore
-      const bounds = new mapboxgl.LngLatBounds(locations.map((place) => place.location));
+      const bounds = new mapboxgl.LngLatBounds(
+        // @ts-ignore
+        locations.map(place => place.location)
+      );
       console.log(bounds);
       setTimeout(() => {
         map.fitBounds(bounds, {
@@ -72,8 +74,8 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
             top: 72,
             right: 500,
             bottom: 30,
-            left: 30,
-          },
+            left: 30
+          }
         });
       }, 500);
     }
@@ -87,58 +89,62 @@ export class MapboxContainer extends React.Component<MapProps, MapState> {
           center={this.props.mapCenter}
           firstCategory={this.props.firstCategory}
           secondCategory={this.props.secondCategory}
-          onMoveEnd={(location) => {
-            this.props.mapCenterChanged(location)
+          onMoveEnd={location => {
+            this.props.mapCenterChanged(location);
           }}
           height="calc(100vh - 6.5em)"
           zoom={6}
         >
-          {
-            this.props.locations.map((place, index) => {
-              if (place.category === 1 && this.props.firstCategory) {
-                return <Marker
+          {this.props.locations.map((place, index) => {
+            if (place.category === 1 && this.props.firstCategory) {
+              return (
+                <Marker
                   anchor="bottom"
                   icon={{
                     height: 48,
                     width: 48,
-                    url: require('assets/images/markers/marker.png')
+                    url: require("assets/images/markers/marker.png")
                   }}
                   position={place.location}
                   key={index}
                 />
-              } else {
-                if (place.category === 2 && this.props.secondCategory) {
-                  return <Marker
+              );
+            } else {
+              if (place.category === 2 && this.props.secondCategory) {
+                return (
+                  <Marker
                     anchor="bottom"
                     icon={{
                       height: 48,
                       width: 48,
-                      url: require('assets/images/markers/marker.png')
+                      url: require("assets/images/markers/marker.png")
                     }}
                     position={place.location}
                     key={index}
                   />
-                } else {
-                  return null
-                }
+                );
+              } else {
+                return null;
               }
-            })
-          }
+            }
+          })}
         </Mapbox>
-        {
-          (this.props.mapCenter === this.props.selectedPlace.location)
-          && this.props.showDetails
-          && <Information
-            detail={this.props.selectedPlace}
-            close={() => {
-              this.props.closeDetails();
-            }}
-            setMarker={(headline) => {
-              const payload = {headline: headline, location: this.props.mapCenter};
-              this.props.setMarker(payload);
-            }}
-          />
-        }
+        {this.props.mapCenter === this.props.selectedPlace.location &&
+          this.props.showDetails && (
+            <Information
+              detail={this.props.selectedPlace}
+              close={() => {
+                this.props.closeDetails();
+              }}
+              setMarker={headline => {
+                const payload = {
+                  headline: headline,
+                  location: this.props.mapCenter
+                };
+                this.props.setMarker(payload);
+              }}
+            />
+          )}
       </div>
     );
   }

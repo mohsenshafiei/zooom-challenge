@@ -1,7 +1,4 @@
-import Map from './map';
-import Marker from './marker';
+import Map from "./map";
+import Marker from "./marker";
 
-export {
-  Map,
-  Marker,
-}
+export { Map, Marker };
