@@ -1,15 +1,17 @@
-import * as React from 'react';
+import * as React from "react";
 
-const style = require('./style.scss');
+const style = require("./style.scss");
 
 interface ISearchBoxProps {
-  changeInput: (input: string) => void
+  changeInput: (input: string) => void;
 }
 
-interface ISearchBoxState {
-}
+interface ISearchBoxState {}
 
-export class SearchBox extends React.PureComponent<ISearchBoxProps, ISearchBoxState> {
+export class SearchBox extends React.PureComponent<
+  ISearchBoxProps,
+  ISearchBoxState
+> {
   constructor(props: ISearchBoxProps) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -25,12 +27,10 @@ export class SearchBox extends React.PureComponent<ISearchBoxProps, ISearchBoxSt
         <h4>Search Your Location</h4>
         <input
           className={style.searchBoxInput}
-          placeholder={'Address, Zip Code, Country, City...'}
-          onChange={
-            (e) => {
-              this.handleChange(e)
-            }
-          }
+          placeholder={"Address, Zip Code, Country, City..."}
+          onChange={e => {
+            this.handleChange(e);
+          }}
         />
       </div>
     );

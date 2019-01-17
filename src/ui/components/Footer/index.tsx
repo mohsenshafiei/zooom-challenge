@@ -1,10 +1,8 @@
-import * as React from 'react';
-const style = require('./style.scss');
+import * as React from "react";
+const style = require("./style.scss");
 
-interface IFooterProps {
-}
-interface IFooterState {
-}
+interface IFooterProps {}
+interface IFooterState {}
 
 export class Footer extends React.PureComponent<IFooterProps, IFooterState> {
   render() {
