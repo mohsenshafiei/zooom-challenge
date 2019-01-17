@@ -1,5 +1,7 @@
 # Zooom-Challenge V0.0.1
 
+<img align="center" src="./docs/assets/zooom-challenge.png" alt="zooom-challenge" width="200">
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing

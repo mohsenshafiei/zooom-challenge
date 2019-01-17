@@ -123,7 +123,7 @@ export interface IPlace {
 // STATE ===============================
 export interface IState {
   mapCenter: LngLatLike;
-  locations: Array<IPlace>;
+  locations: Array<any>;
   firstCategory: boolean;
   secondCategory: boolean;
   showDetails: boolean;
