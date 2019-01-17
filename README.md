@@ -1,6 +1,6 @@
 # Zooom-Challenge V0.0.1
 
-![Zooom Challenge](./docs/assets/zooom-challenge.png)
+<img align="center" src="./docs/assets/zooom-challenge.png" alt="zooom-challenge" width="200">
 
 ## Getting Started
 
