@@ -1,11 +1,10 @@
-import * as React from 'react';
-const style = require('./style.scss');
+import * as React from "react";
+const style = require("./style.scss");
 
 interface IFilterProps {
   changeFilter: (option: number) => void;
 }
-interface IFilterState {
-}
+interface IFilterState {}
 
 export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
   constructor(props: IFilterProps) {
@@ -27,7 +26,7 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
             <input
               className={style.checkBox}
               type="checkbox"
-              onChange={ (e) => this.handleFilter(1)}
+              onChange={e => this.handleFilter(1)}
               defaultChecked={true}
             />
           </div>
@@ -36,7 +35,7 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
             <input
               className={style.checkBox}
               type="checkbox"
-              onChange={ (e) => this.handleFilter(2)}
+              onChange={e => this.handleFilter(2)}
               defaultChecked={true}
             />
           </div>

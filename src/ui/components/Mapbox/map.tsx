@@ -1,12 +1,12 @@
-import * as React from 'react';
-import * as MapboxGL from 'mapbox-gl';
+import * as React from "react";
+import * as MapboxGL from "mapbox-gl";
 
 interface MapProps {
   center: MapboxGL.LngLatLike;
   zoom: number;
   height: string;
-  firstCategory: boolean,
-  secondCategory: boolean,
+  firstCategory: boolean;
+  secondCategory: boolean;
   children?: React.ReactNode;
   moveTo?: MapboxGL.LngLatLike;
   onLoad?: (map: MapboxGL.Map) => void;
@@ -24,48 +24,54 @@ class Map extends React.Component<MapProps, MapState> {
   }
 
   readonly state: MapState = {
-    map: null,
+    map: null
   };
 
-  private container: React.RefObject<HTMLDivElement> = React.createRef<HTMLDivElement>();
+  private container: React.RefObject<HTMLDivElement> = React.createRef<
+    HTMLDivElement
+  >();
 
   componentDidMount() {
-    const {
-      center,
-      zoom,
-    } = this.props;
-    Object.getOwnPropertyDescriptor(MapboxGL, "accessToken").set(process.env.MAPBOX_TOKEN);
-    const mapOptions: MapboxGL.MapboxOptions = Object.assign({
-      container: (this.container.current) as HTMLDivElement,
-      style: 'mapbox://styles/mapbox/streets-v9',
-      trackResize: true,
-    }, { center, zoom });
+    const { center, zoom } = this.props;
+    Object.getOwnPropertyDescriptor(MapboxGL, "accessToken").set(
+      process.env.MAPBOX_TOKEN
+    );
+    const mapOptions: MapboxGL.MapboxOptions = Object.assign(
+      {
+        container: this.container.current as HTMLDivElement,
+        style: "mapbox://styles/mapbox/streets-v9",
+        trackResize: true
+      },
+      { center, zoom }
+    );
 
     const map: MapboxGL.Map = new MapboxGL.Map(mapOptions);
 
-    map.addControl(new MapboxGL.GeolocateControl({
-      trackUserLocation: true,
-      positionOptions: {
-        enableHighAccuracy: true,
-      }
-    }), 'top-left');
+    map.addControl(
+      new MapboxGL.GeolocateControl({
+        trackUserLocation: true,
+        positionOptions: {
+          enableHighAccuracy: true
+        }
+      }),
+      "top-left"
+    );
 
-    map.on('load', () => {
+    map.on("load", () => {
       this.onLoad(map);
     });
 
-    map.on('movestart', (data: MapboxGL.MapDataEvent) => {
+    map.on("movestart", (data: MapboxGL.MapDataEvent) => {
       this.onMoveStart(data);
     });
 
-    map.on('moveend', () => {
+    map.on("moveend", () => {
       const { map } = this.state;
 
       if (map) {
         this.onMoveEnd(map.getCenter());
       }
     });
-
   }
 
   componentWillUnmount() {
@@ -77,7 +83,7 @@ class Map extends React.Component<MapProps, MapState> {
 
   onLoad(map: MapboxGL.Map) {
     this.setState({
-      map,
+      map
     });
     const { onLoad } = this.props;
     if (onLoad) onLoad(map);
@@ -97,18 +103,13 @@ class Map extends React.Component<MapProps, MapState> {
     const { map } = this.state;
     const { height, children } = this.props;
     return (
-      <div
-        ref={this.container}
-        className="mapbox"
-        style={{ height }}
-      >
-        {this.state.map
-        && React.Children.map(children, (child: any) => {
-          if (child) {
-            return <child.type {...child.props} map={this.state.map}/>
-          }
-        })
-        }
+      <div ref={this.container} className="mapbox" style={{ height }}>
+        {this.state.map &&
+          React.Children.map(children, (child: any) => {
+            if (child) {
+              return <child.type {...child.props} map={this.state.map} />;
+            }
+          })}
       </div>
     );
   }

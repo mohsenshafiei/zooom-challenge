@@ -1,33 +1,33 @@
-import {ActionTypes} from "./actionTypes";
+import { ActionTypes } from "./actionTypes";
 
 // SAGA ACTIONS =================================
 export interface ILoginUser {
-  type: ActionTypes.LOGIN_USER,
-  username: string,
-  password: string,
+  type: ActionTypes.LOGIN_USER;
+  username: string;
+  password: string;
 }
-
 
 // REDUCERS ACTIONS =================================
 export interface ILoginUserFulfilled {
-  type: ActionTypes.LOGIN_USER_FULFILLED,
-  payload: string,
-  isLoggedIn: boolean,
+  type: ActionTypes.LOGIN_USER_FULFILLED;
+  payload: string;
+  isLoggedIn: boolean;
 }
 
 export interface ILoginUserPending {
-  type: ActionTypes.LOGIN_USER_PENDING,
+  type: ActionTypes.LOGIN_USER_PENDING;
 }
 
 export interface ILoginUserRejected {
-  type: ActionTypes.LOGIN_USER_REJECTED,
-  message: string,
-  token: '',
+  type: ActionTypes.LOGIN_USER_REJECTED;
+  message: string;
+  token: "";
 }
 
-export type UserReducerActions = ILoginUserFulfilled |
-  ILoginUserPending |
-  ILoginUserRejected;
+export type UserReducerActions =
+  | ILoginUserFulfilled
+  | ILoginUserPending
+  | ILoginUserRejected;
 
 // STATE ===============================
 export interface IState {
@@ -35,9 +35,8 @@ export interface IState {
   isLoggedIn: boolean;
 }
 
-
 // PAYLOADS ===============================
 export interface ILoginUserPayload {
-  username: string,
-  password: string,
+  username: string;
+  password: string;
 }
